@@ -16,9 +16,16 @@ app.secret_key = os.urandom(12)  # Generic key for dev purposes only
 #heroku = Heroku(app)
 
 # ======== Routing =========================================================== #
+# -------- Index ------------------------------------------------------------- #
+@app.route('/', methods=['GET'])
+def home():
+    title = 'rdp - Home'
+    return render_template('index.html', title=title)
+
 # -------- Login ------------------------------------------------------------- #
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    title = 'rdp - Login'
     if not session.get('logged_in'):
         form = forms.LoginForm(request.form)
         if request.method == 'POST':
@@ -33,7 +40,7 @@ def login():
             return json.dumps({'status': 'Both fields required'})
         return render_template('login.html', form=form)
     user = helpers.get_user()
-    return render_template('home.html', user=user)
+    return render_template('home.html', user=user, title=title)
 
 
 @app.route("/logout")
@@ -45,6 +52,7 @@ def logout():
 # -------- Signup ---------------------------------------------------------- #
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    title = 'rdp - signup'
     if not session.get('logged_in'):
         form = forms.LoginForm(request.form)
         if request.method == 'POST':
@@ -59,7 +67,7 @@ def signup():
                     return json.dumps({'status': 'Signup successful'})
                 return json.dumps({'status': 'Username taken'})
             return json.dumps({'status': 'User/Pass required'})
-        return render_template('login.html', form=form)
+        return render_template('login.html', form=form, title=title)
     return redirect(url_for('login'))
 
 
