@@ -67,7 +67,7 @@ def username_taken(username):
     with session_scope() as s:
         return s.query(tabledef.User).filter(tabledef.User.username.in_([username])).first()
     
-def contact_us(email, message)
+def contact_us(email, message):
     with session_scope() as s:
         u = tabledef.Contact_us(email = email, message = message)
         s.add(u)
