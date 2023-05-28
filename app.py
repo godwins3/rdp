@@ -86,7 +86,29 @@ def settings():
         return render_template('settings.html', user=user)
     return redirect(url_for('login'))
 
+@app.route('/about')
+def about():
+    title ="rdp - about"
+    return render_template('about.html', title=title)
 
+@app.route('/events')
+def events():
+    title ="rdp - events"
+    if session.get('logged_in'):
+        return render_template('events.html', title=title)
+    return redirect(url_for('login'))
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    title = 'rdp - contact us'
+    form = forms.ContactForm(request.form)
+    if request.method == 'POST':
+        email = request.form['email']
+        message = request.form['message']
+        helpers.contact_us(email, message)
+        return json.dumps({"status": "sent"})
+
+    return render_template('contact.html', title=title)
 # ======== Main ============================================================== #
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True, host="0.0.0.0")
