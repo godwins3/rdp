@@ -23,7 +23,22 @@ var login = function() {
     }
   });
 };
-
+var contact = function() {
+  $.post({
+    type: "POST",
+    url: "/contact",
+    data: {
+      "name": $("#contact-name").val(),
+      "email": $("#contact-email").val(),
+      "message": $("#contact-message").val(),
+    },
+    success(response){
+      var status = JSON.parse(response)["status"];
+      if (status === "received") { location.reload(); }
+      else { error("contact-input"); }
+    }
+  })
+}
 $(document).ready(function() {
   
   $(document).on("click", "#login-button", login);
