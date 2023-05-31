@@ -102,13 +102,13 @@ def events():
 def contact():
     title = 'rdp - contact us'
     form = forms.ContactForm(request.form)
-    if request.method == 'POST':
-        email = request.form['email']
-        message = request.form['message']
-        helpers.contact_us(email, message)
-        return json.dumps({"status": "sent"})
-
-    return render_template('contact.html', title=title)
+    if form.validate_on_submit():
+        name = form.name.data
+        email = form.email.data
+        message = form.message.data
+        phone = form.phone.data
+        return "Form posted. name: {}, email:{}, message:{}, phone:{}".format(name, email, message, phone)
+    return render_template('contact.html', form=form, title=title)
 # ======== Main ============================================================== #
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True, host="0.0.0.0")
