@@ -12,6 +12,7 @@
         "Juma",
         "mwananchi",
         "sessionmaker",
+        "slugifier",
         "tabledef"
     ]
 }
