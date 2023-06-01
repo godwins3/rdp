@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from scripts import tabledef
-from scripts import forms
+from scripts import forms, db
 from scripts.forms import PostForm
 from scripts.utils import save_picture, title_slugifier
 from scripts import helpers
@@ -11,7 +11,7 @@ from flask_login import login_required, current_user
 import json
 import sys
 import os
-from . import app, db
+from . import app
 
 app = Flask(__name__)
 app.secret_key = os.urandom(12)  # Generic key for dev purposes only
