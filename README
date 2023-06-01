@@ -1,0 +1,30 @@
+# RDP
+
+'''
+A political party web application made using flask
+'''
+
+## How To Install Locally
+
+'''
+cd RDP
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+flask db upgrade
+flask shell
+from blog.models import User
+u = User(username="admin", email="admin@rdp.com")
+u.set_password_hash("your-secret-psw")
+db.session.add(u)
+db.session.commit()
+quit()
+flask run
+'''
+
+### Few things you might want to add/change if you intend to actually use the app:
+
+- Error Logging
+- Rate Limiting
+- Markdown Preview
+- Whatever else you want! The theme is based on Bootstrap 4, so it's easily adaptable.
