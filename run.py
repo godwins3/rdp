@@ -1,7 +1,7 @@
-from flask import Flask
+from scripts import db
 from scripts.models import User, Post
-app = Flask(__name__)
+from . import app
 
 @app.shell_context_processor
 def make_shell_context():
-    return { "User": User, "Post": Post}
+    return {"db": db, "User": User, "Post": Post}
