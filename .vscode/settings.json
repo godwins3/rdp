@@ -9,8 +9,10 @@
         "gensalt",
         "Hannington",
         "hashpw",
+        "idnumber",
         "Juma",
         "mwananchi",
+        "othername",
         "sessionmaker",
         "slugifier",
         "tabledef"
