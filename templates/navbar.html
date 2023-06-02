@@ -1,10 +1,9 @@
 <section class="hero is-white">
   <nav class="navbar is-transparent">
     <div class="navbar-brand">
-      <a class="navbar-item" href="/">
-        <img src="https://github.com/anfederico/Flaskex/raw/master/media/flaskex-logo.png" alt="Flaskex_logo">
-        <h6 href="/" class="subtitle"><strong>Flaskex</strong></h6>
-      </a>
+      <a class="navbar-brand" href="{{ url_for('home') }}">
+				<img src="{{ url_for('static', filename='images/rdp7.jpg') }}" style="width: 90px; height: 55px" alt="">
+			</a>
       <div id="navbar-burger-id" class="navbar-burger burger" data-target="navbar-menu-id">
         <span></span>
         <span></span>
