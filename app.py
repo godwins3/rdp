@@ -5,13 +5,13 @@ from scripts import forms, db
 from scripts.forms import PostForm
 from scripts.utils import save_picture, title_slugifier
 from scripts import helpers
-from scripts.models import Post, user
+from scripts.models import Post, User
 from flask import Flask, redirect, url_for, render_template, request, session, abort, flash
 from flask_login import login_required, current_user
 import json
 import sys
 import os
-from . import app
+from app import *
 
 app = Flask(__name__)
 app.secret_key = os.urandom(12)  # Generic key for dev purposes only
@@ -62,11 +62,19 @@ def signup():
         form = forms.LoginForm(request.form)
         if request.method == 'POST':
             username = request.form['username'].lower()
+            surname = request.form['surname'].upper()
+            othername = request.form['othername'].upper()
+            mobile = request.form['mobile']
+            idnumber = request.form['idnumber']
+            D_O_B = request.form['d_o_b']
+            gender = request.form['gender'].upper()
+            county = request.form['county'].upper()
+            constituency = request.form['constituency'].upper()
             password = helpers.hash_password(request.form['password'])
             email = request.form['email']
             if form.validate():
                 if not helpers.username_taken(username):
-                    helpers.add_user(username, password, email)
+                    helpers.add_user(username, password, email, surname, othername)
                     session['logged_in'] = True
                     session['username'] = username
                     return json.dumps({'status': 'Signup successful'})
@@ -99,11 +107,8 @@ def about():
 @app.route('/events')
 def events():
     title ="rdp - events"
-    if not session.get('logged_in'):
-        
-        return render_template('events.html', title=title)
-    
-    return redirect(url_for('login'))
+    return render_template('events.html', title=title)
+
 @app.route("/index")
 def homepage():
     page_number = request.args.get("page", 1, type=int)
