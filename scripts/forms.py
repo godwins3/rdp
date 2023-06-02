@@ -9,8 +9,16 @@ from wtforms.validators import DataRequired, Length
 class LoginForm(Form):
     username = StringField('Username:', validators=[validators.Length(min=1, max=30)])
     password = StringField('Password:', validators=[validators.Length(min=1, max=30)])
+    surname = StringField('Surname:', validators=[validators.Length(min=1, max=30)])
+    othername = StringField('Other Name:', validators=[validators.Length(min=1, max=30)])
+    idnumber = StringField('Id Number:', validators=[validators.Length(min=1, max=30)])
+    mobile = StringField('Mobile:', validators=[validators.Length(min=1, max=30)])
+    D_O_B = StringField('D_O_B:', validators=[validators.Length(min=1, max=30)])
+    genders = StringField('Genders:', validators=[validators.Length(min=1, max=30)])
+    county = StringField('County:', validators=[validators.Length(min=1, max=30)])
+    constituency = StringField('Constituency:', validators=[validators.Length(min=1, max=30)])
     email = StringField('Email:', validators=[validators.optional(), validators.Length(min=0, max=50)])
-
+    
 class ContactForm(Form):
     name = StringField('Name:', validators=[validators.optional(), validators.Length(min=0, max=50)])
     email = StringField('Email:', validators=[validators.optional(), validators.Length(min=0, max=50)])
