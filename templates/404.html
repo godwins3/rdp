@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block title %}404 - Page not found {% endblock %}
+
+{% block content %}
+<div class="container content-container">
+
+    <div class="row no-gutters">
+
+        <div class="col-md-9 order-md-2">
+            <div class="about-page-block">
+                <p class="lead">Error 404.</p>
+                <hr>
+                <p>Page not found.</p>
+                <p>The requested page does not exist or the url entered is incorrect.</p>
+                <hr>
+                <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('home') }}">↩ return to home</a>            
+            </div>  
+        </div>
+
+        
+    </div>
+    
+</div>
+{% endblock %}
