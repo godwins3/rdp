@@ -8,6 +8,7 @@ from scripts import helpers
 from scripts.models import Post, User
 from flask import Flask, redirect, url_for, render_template, request, session, abort, flash
 from flask_login import login_required, current_user
+import smtplib
 import json
 import sys
 import os
@@ -113,6 +114,46 @@ def leadership():
 def events():
     title ="rdp - events"
     return render_template('events.html', title=title)
+
+def send_email(name, email, message):
+    # Set up the SMTP server details
+    smtp_server = 'smtp.example.com'
+    smtp_port = 587
+    smtp_username = 'your_username'
+    smtp_password = 'your_password'
+    admin_email = 'admin@admin.com'
+    
+    # Compose the email message
+    subject = 'New Contact Form Submission'
+    body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
+    message = f"Subject: {subject}\n\n{body}"
+    
+    try:
+        # Connect to the SMTP server
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()
+            server.login(smtp_username, smtp_password)
+            
+            # Send the email
+            server.sendmail(email, admin_email, message)
+    
+    except Exception as e:
+        print(f"Error sending email: {str(e)}")
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        # Handle the form submission here (e.g., send an email)
+        name = request.form.get('name')
+        email = request.form.get('email')
+        message = request.form.get('message')
+        # Add your code to handle the form data
+        
+        # Send email to admin
+        send_email(name, email, message)
+    else:
+        return render_template('contact.html')
+
 
 @app.route("/index")
 def homepage():
@@ -220,17 +261,7 @@ def post_delete(post_id):
     db.session.commit()
     return redirect(url_for("homepage"))
 
-@app.route('/contact', methods=['GET', 'POST'])
-def contact():
-    title = 'rdp - contact us'
-    form = forms.ContactForm(request.form)
-    if request.method == 'GET':
-        name = request.form['name']
-        email = request.form['email']
-        message = request.form['message']
-        phone = request.form['phone']
-        return "Form posted. name: {}, email:{}, message:{}, phone:{}".format(name, email, message, phone)
-    return render_template('contact.html', form=form, title=title)
+
 
 #---------------- error handling ------------------------------------------------
 @app.errorhandler(404)
