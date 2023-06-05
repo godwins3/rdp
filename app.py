@@ -104,6 +104,11 @@ def about():
     title ="rdp - about"
     return render_template('about.html', title=title)
 
+@app.route('/leadership')
+def leadership():
+    title ="rdp - our leaders"
+    return render_template('leadership.html', title=title)
+
 @app.route('/events')
 def events():
     title ="rdp - events"

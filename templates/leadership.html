@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<!-- Our Leadership -->
+<section class="blog py-5">
+	<div class="container py-md-5">
+		<h3 class="heading mb-sm-5 mb-4 text-center"> Our Leadership</h3>
+		<div class="row blog-grids">
+			<div class="col-lg-4 col-md-6 blog-left mb-lg-0 mb-sm-5 pb-lg-0 pb-5">
+				<img src="{{ url_for('static', filename='images/rdp3.jpg') }}" class="img-fluid" alt="" />
+				<a href="{{ url_for('home') }}">
+					<div class="blog-info">
+
+						<h4>Party Leader</h4>
+
+						<p class="mt-2"> Senator Juma Benard</p>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-4 col-md-6 blog-middle mb-lg-0 mb-sm-5 pb-lg-0 pb-md-5">
+				<img src="{{ url_for('static', filename='images/rdp1.jpg') }}" class="img-fluid" alt="" />
+				<a href="{{ url_for('home') }}">
+					<div class="blog-info">
+						<h4>Deputy Party Leader Strategy</h4>
+						<p class="mt-2"> </p>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-4 col-md-6 blog-right mt-lg-0 mt-5 pt-lg-0 pt-md-5">
+
+				<img src="{{ url_for('static', filename='images/rdp6.jpg') }}" class="img-fluid" alt="">
+
+				<!-- <img src="images/s4.jpg" class="img-fliud" alt="" /> -->
+				<a href="{{ url_for('home') }}">
+					<div class="blog-info">
+						<h4>Deputy Party Leader Programs</h4>
+						<p class="mt-2"> Jane Doe</p>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="row blog-grids">
+			<div class="col-lg-4 col-md-6 blog-right mt-lg-0 mt-5 pt-lg-0 pt-md-5">
+
+				<img src="{{ url_for('static', filename='images/rdp5.jpg') }}" class="img-fluid" alt="">
+
+				<!-- <img src="images/s4.jpg" class="img-fliud" alt="" /> -->
+				<a href="{{ url_for('home') }}">
+					<div class="blog-info">
+						<h4> Chairperson</h4>
+						<p class="mt-2"> Gilbert Aluoch</p>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-4 col-md-6 blog-right mt-lg-0 mt-5 pt-lg-0 pt-md-5">
+
+				<img src="{{ url_for('static', filename='images/rdp2.jpg') }}" class="img-fluid" alt="">
+
+				<!-- <img src="images/s4.jpg" class="img-fliud" alt="" /> -->
+				<a href="{{ url_for('home') }}">
+					<div class="blog-info">
+						<h4>Secretary General</h4>
+						<p class="mt-2"> Hannington Amakobe</p>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-4 col-md-6 blog-right mt-lg-0 mt-5 pt-lg-0 pt-md-5">
+
+				<img src="{{ url_for('static', filename='images/rdp4.jpg') }}" class="img-fluid" alt="">
+
+				<!-- <img src="images/s4.jpg" class="img-fliud" alt="" /> -->
+				<a href="{{ url_for('home') }}">
+					<div class="blog-info">
+						<h4>National Treasurer </h4>
+						<p class="mt-2"> Jane Doe</p>
+					</div>
+				</a>
+			</div>
+			
+		</div>
+	</div>
+</section>
+
+{% endblock %}
