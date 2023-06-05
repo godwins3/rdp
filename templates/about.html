@@ -1,49 +1,39 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<!-- banner -->
-<section class="banner_w3lspvt" id="home">
-	<div class="csslider infinity" id="slider1">
-		<div class="banner-top">
-			<div class="overlay">
-				<div class="container">
-					<div class="w3layouts-banner-info text-center">
-						<h3 class="text-wh">restoration of devolution party</h3>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- //banner -->
+
 <section class ="core-grids">
-	<div class ="container py-md-4">
-		
+	<div class="px-4 py-5 my-5 text-center">
+		<h1 class="display-5 fw-bold text-body-emphasis">Party Slogan</h1>
+		<div class="col-lg-6 mx-auto">
+			<p class="lead mb-4">
+			  Establish a prosperous and industrialized government in which every citizen enjoys
+			  their democratic rights.
+		  </p>
+	  </div>
 	</div>
 </section>
 
-<!-- about us -->
-<section class="core-value py-5">
-	<div class="container py-md-4">
-		<h3 class="heading mb-sm-5 mb-4 text-center"> About Us</h3>
-		<div class="row core-grids">
-			<div class="col-lg-6 core-left">
-				<img src="{{ url_for('static', filename='images/1.jpg') }}" class="img-fluid" alt="" />
-			</div>
-			<div class="col-lg-6 core-right">
-				<h3 class="mt-4">RDP is a political party being brought to full and live existence by youths across the 
-					nation of Kenya.</h3>
-				<p class="mt-3">
-					We are focussed on revitalizing the unfulfilled goals of devolution that have not yet been fulfilled 
-					and are seemingly not being fulfilled soon. As RDP, we are focussed on youth empowerment and hence the 
-					major shareholders of the party. We are creating a platform where the youths, women and the marginalized 
-					can get opportunities to represent their various regions in political positions across the country
-				</p>
-			</div>
+<section class ="core-grids">
+	<div class="px-4 py-5 my-5 text-center">
+		<h1 class="display-5 fw-bold text-body-emphasis">Our Vision</h1>
+		<div class="col-lg-6 mx-auto">
+		  	<p class="lead mb-4">
+				Establish a prosperous and industrialized government in which every citizen enjoys
+				their democratic rights.
+			</p>
+		</div>
+	</div>
+	<div class="px-4 py-5 my-5 text-center">
+		<h1 class="display-5 fw-bold text-body-emphasis">Our Mission</h1>
+		<div class="col-lg-6 mx-auto">
+		  	<p class="lead mb-4">
+				To give power to local citizens and enhance public participation, accountability, 
+				equity and transparency in the devolved government.
+			</p>
 		</div>
 	</div>
 </section>
-<section class ="core-grids">
-	<div class ="container py-md-4"></div>
-</section>
+
+
 {% endblock %}
