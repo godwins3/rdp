@@ -1,51 +1,6 @@
-{% extends "base.html" %}
+{% extends "layout.html" %}
 {% block body %}
-<section class="hero is-white is-medium">
-  <nav class="navbar is-transparent">
-    <div class="navbar-brand">
-      <a class="navbar-brand" href="{{ url_for('home') }}">
-				<img src="{{ url_for('static', filename='images/rdp7.jpg') }}" style="width: 90px; height: 55px" alt="">
-			</a>
-      <div id="navbar-burger-id" class="navbar-burger burger" data-target="navbar-menu-id">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-    <div id="navbar-menu-id" class="navbar-menu">
-      <div class="navbar-end">
-        <a class="navbar-item">
-          <div class="field">
-            <p class="control has-icons-left">
-              <input class="login-input input is-small is-success" type="text" id="login-user" placeholder="Username">
-                <span class="icon is-small is-left">
-                  <i class="fa fa-user"></i>
-                </span>
-            </p>
-          </div>
-        </a>
-        <a class="navbar-item">
-          <div class="field">
-            <p class="control has-icons-left">
-              <input class="login-input input is-small is-success" type="password" id="login-pass" placeholder="Password">
-                <span class="icon is-small is-left">
-                  <i class="fa fa-lock"></i>
-                </span>
-            </p>
-          </div>
-        </a>
-        <span class="navbar-item">
-          <a id="login-button" class="button is-primary is-inverted">
-            <span class="icon">
-              <i class="fa fa-check"></i>
-            </span>
-            <span>Login</span>
-          </a>
-        </span>
-      </div>
-    </div>
-  </nav>
-</section>
+<link rel="stylesheet" href="../static/css/style.css">
 <title>rdp</title>
 <section class="hero is-primary is-bold is-medium">
   <div class="hero-body">
@@ -53,7 +8,7 @@
       <div class="columns">
         <div class="column is-auto">
           <br>
-          <p class="title is-2">rdp</p>
+          <p class="title is-2"></p>
           <p class="subtitle is-4"><i></i></p>
           <p class="subtitle is-5"></p>
           <p class="subtitle is-5"></p>

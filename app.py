@@ -98,7 +98,7 @@ def settings():
         user = helpers.get_user()
         return render_template('settings.html', user=user)
     return redirect(url_for('login'))
-
+    
 @app.route('/about')
 def about():
     title ="rdp - about"
