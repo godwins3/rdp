@@ -81,7 +81,7 @@ def register():
                 county,
                 constituency
                 )
-    return render_template('index.html', form=form, title=title)
+    return render_template('login.html', form=form, title=title)
 
 
 # -------- Settings ---------------------------------------------------------- #
