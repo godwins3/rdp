@@ -58,39 +58,30 @@ def logout():
 # -------- Signup ---------------------------------------------------------- #
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    title = 'rdp - signup'
-    if not session.get('logged_in'):
-        form = forms.LoginForm(request.form)
-        if request.method == 'POST':
-            surname = request.form['surname'].upper()
-            othername = request.form['othername'].upper()
-            mobile = request.form['mobile']
-            idnumber = request.form['idnumber']
-            D_O_B = request.form['D_O_B']
-            gender = request.form['gender'].upper()
-            county = request.form['county'].upper()
-            constituency = request.form['constituency'].upper()
-            email = request.form['email']
-            if form.validate():
-                if not helpers.username_taken(idnumber):
-                    helpers.add_user(                        
-                        email, 
-                        surname, 
-                        othername,
-                        mobile,
-                        idnumber,
-                        D_O_B,
-                        gender,
-                        county,
-                        constituency
-                        )
-                    session['logged_in'] = True
-                    session['idnumber'] = idnumber
-                    return json.dumps({'status': 'Registration successful'})
-                return json.dumps({'status': 'ID Number taken'})
-            return json.dumps({'status': 'Check your credentials'})
-        return render_template('login.html', form=form, title=title)
-    return redirect(url_for('login'))
+    title = 'rdp - signup'  
+    form = forms.LoginForm(request.form)
+    if request.method == 'POST':
+        surname = request.form['surname'].upper()
+        othername = request.form['othername'].upper()
+        mobile = request.form['mobile']
+        idnumber = request.form['idnumber']
+        D_O_B = request.form['D_O_B']
+        gender = request.form['gender'].upper()
+        county = request.form['county'].upper()
+        constituency = request.form['constituency'].upper()
+        email = request.form['email']
+        helpers.add_user(                        
+                email, 
+                surname, 
+                othername,
+                mobile,
+                idnumber,
+                D_O_B,
+                gender,
+                county,
+                constituency
+                )
+    return render_template('login.html', form=form, title=title)
 
 
 # -------- Settings ---------------------------------------------------------- #
