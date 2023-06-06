@@ -26,13 +26,19 @@ def db_connect():
 class User(Base):
     __tablename__ = "user"
 
-    id = Column(Integer, primary_key=True)
-    username = Column(String(30), unique=True)
-    password = Column(String(512))
-    email = Column(String(50))
-
+    email = Column(String(50), unique=True) 
+    surname =Column(String(50))
+    othername = Column(String(50))
+    mobile =Column(Integer, unique=True)
+    idnumber =Column(Integer, unique=True, primary_key=True)
+    D_O_B = Column(String(50))
+    gender =Column(String(50))
+    county = Column(String(50))
+    constituency =Column(String(50))
+                        
+    
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<User %r>' % self.idnumber
 
 
 engine = db_connect()  # Connect to database

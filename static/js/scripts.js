@@ -47,13 +47,19 @@ $(document).ready(function() {
   $(document).on("click", "#signup-button", function() {
     $.post({
       type: "POST",
-      url: "/signup",
-      data: {"username": $("#signup-user").val(), 
-             "password": $("#signup-pass").val(), 
+      url: "/register",
+      data: {"surname": $("#signup-surname").val(), 
+             "othername": $("#signup-othername").val(),
+             "mobile": $("#signup-mobile").val(),
+             "idnumber": $("#signup-idnumber").val(),
+             "D_O_B": $("#signup-D_O_B").val(),
+             "gender": $("#signup-gender").val(),
+             "county": $("#signup-county").val(),
+             "constituency": $("#signup-constituency").val(), 
              "email": $("#signup-mail").val()},
       success(response) {
         var status = JSON.parse(response)["status"];
-        if (status === "Signup successful") { location.reload(); }
+        if (status === "Registration successful") { location.reload(); }
         else { message(status, true, "signup-box"); }
       }
     });

@@ -33,39 +33,32 @@ def get_user():
         return user
 
 
-def add_user(username, password, email):
+def add_user(email, surname, othername, mobile, idnumber, D_O_B, gender, county, constituency):
     with session_scope() as s:
-        u = tabledef.User(username=username, password=password.decode('utf8'), email=email)
+        u = tabledef.User(email=email, 
+                          surname=surname, 
+                          othername=othername, 
+                          mobile=mobile, 
+                          idnumber=idnumber, 
+                          D_O_B=D_O_B, 
+                          gender=gender, 
+                          county=county,
+                          constituency=constituency)
         s.add(u)
         s.commit()
 
-
-def change_user(**kwargs):
-    username = session['username']
+def credentials_valid(idnumber, mobile):
     with session_scope() as s:
-        user = s.query(tabledef.User).filter(tabledef.User.username.in_([username])).first()
-        for arg, val in kwargs.items():
-            if val != "":
-                setattr(user, arg, val)
-        s.commit()
-
-
-def hash_password(password):
-    return bcrypt.hashpw(password.encode('utf8'), bcrypt.gensalt())
-
-
-def credentials_valid(username, password):
-    with session_scope() as s:
-        user = s.query(tabledef.User).filter(tabledef.User.username.in_([username])).first()
+        user = s.query(tabledef.User).filter(tabledef.User.idnumber.in_([idnumber])).first()
         if user:
-            return bcrypt.checkpw(password.encode('utf8'), user.password.encode('utf8'))
+            return bcrypt.checkpw(mobile.encode('utf8'), user.mobile.encode('utf8'))
         else:
             return False
 
 
-def username_taken(username):
+def username_taken(idnumber):
     with session_scope() as s:
-        return s.query(tabledef.User).filter(tabledef.User.username.in_([username])).first()
+        return s.query(tabledef.User).filter(tabledef.User.idnumber.in_([idnumber])).first()
     
 def contact_us(email, message):
     with session_scope() as s:

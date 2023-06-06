@@ -7,8 +7,6 @@ from wtforms.validators import DataRequired, Length
 
 
 class LoginForm(Form):
-    username = StringField('Username:', validators=[validators.Length(min=1, max=30)])
-    password = StringField('Password:', validators=[validators.Length(min=1, max=30)])
     surname = StringField('Surname:', validators=[validators.Length(min=1, max=30)])
     othername = StringField('Other Name:', validators=[validators.Length(min=1, max=30)])
     idnumber = StringField('Id Number:', validators=[validators.Length(min=1, max=30)])
