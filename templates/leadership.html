@@ -1,6 +1,8 @@
 {% extends 'layout.html' %}
 
+
 {% block body %}
+<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel='stylesheet' type='text/css' />
 <!-- Our Leadership -->
 <section class="blog py-5">
 	<div class="container py-md-5">
@@ -36,7 +38,6 @@
 				  </div>
 				</div>
 			</div>
-		</br>
 			<div class="col">
 				<div class="card shadow-sm">
 				  <img src="{{ url_for('static', filename='images/rdp5.jpg') }}" class="img-fluid" alt="" />
