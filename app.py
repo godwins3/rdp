@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import sqlite3
 from scripts import tabledef
 from scripts import forms, db
 from scripts.forms import PostForm
@@ -144,114 +144,38 @@ def contact():
         send_email(name, email, message)
     else:
         return render_template('contact.html')
+    
+# ---------- admin ------------------------------------------------------------------------------------
 
+# Hard-coded admin login details
+ADMIN_USERNAME = 'admin'
+ADMIN_PASSWORD = 'admin'
 
-@app.route("/index")
-def homepage():
-    page_number = request.args.get("page", 1, type=int)
-    posts = Post.query.order_by(Post.created_at.desc()).paginate(page_number, 6, True)
+# Endpoint for admin dashboard login
+@app.route('/admin/login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+            # Successful login, redirect to the admin dashboard
+            return redirect('/admin/dashboard')
+        else:
+            return 'Invalid login credentials'
+    
+    return render_template('admin_login.html')
 
-    if posts.has_next:
-        next_page = url_for("homepage", page=posts.next_num)
-    else:
-        next_page = None
-
-    if posts.has_prev:
-        previous_page = url_for("homepage", page=posts.prev_num)
-    else:
-        previous_page = None
-
-    return render_template(
-        "homepage.html",
-        posts=posts,
-        current_page=page_number,
-        next_page=next_page,
-        previous_page=previous_page,
-    )
-
-
-@app.route("/posts/<string:post_slug>")
-def post_detail(post_slug):
-    post_instance = Post.query.filter_by(slug=post_slug).first_or_404()
-    return render_template("post_detail.html", post=post_instance)
-
-
-@app.route("/create-post", methods=["GET", "POST"])
-@login_required
-def post_create():
-    form = PostForm()
-    if form.validate_on_submit():
-        slug = title_slugifier(form.title.data)
-        new_post = Post(
-            title=form.title.data,
-            body=form.body.data,
-            slug=slug,
-            description=form.description.data,
-            author=current_user,
-        )
-
-        if form.image.data:
-            try:
-                image = save_picture(form.image.data)
-                new_post.image = image
-            except Exception:
-                db.session.add(new_post)
-                db.session.commit()
-                flash(
-                    "There was a problem uploading the image. Change image and try again."
-                )
-                return redirect(url_for("post_update", post_id=new_post.id))
-
-        db.session.add(new_post)
-        db.session.commit()
-        return redirect(url_for("post_detail", post_slug=slug))
-    return render_template("post_editor.html", form=form)
-
-
-@app.route("/posts/<int:post_id>/update", methods=["GET", "POST"])
-@login_required
-def post_update(post_id):
-    post_instance = Post.query.get_or_404(post_id)
-    if post_instance.author != current_user:
-        abort(403)
-    form = PostForm()
-    if form.validate_on_submit():
-        post_instance.title = form.title.data
-        post_instance.description = form.description.data
-        post_instance.body = form.body.data
-
-        if form.image.data:
-            try:
-                image = save_picture(form.image.data)
-                post_instance.image = image
-            except Exception:
-                db.session.commit()
-                flash(
-                    "There was a problem uploading the image. Change image and try again."
-                )
-                return redirect(url_for("post_update", post_id=post_instance.id))
-
-        db.session.commit()
-        return redirect(url_for("post_detail", post_slug=post_instance.slug))
-    elif request.method == "GET":
-        form.title.data = post_instance.title
-        form.description.data = post_instance.description
-        form.body.data = post_instance.body
-
-    post_image = post_instance.image or None
-    return render_template("post_editor.html", form=form, post_image=post_image)
-
-
-@app.route("/posts/<int:post_id>/delete", methods=["POST"])
-@login_required
-def post_delete(post_id):
-    post_instance = Post.query.get_or_404(post_id)
-    if post_instance.author != current_user:
-        abort(403)
-    db.session.delete(post_instance)
-    db.session.commit()
-    return redirect(url_for("homepage"))
-
+# Endpoint for admin dashboard
+@app.route('/admin/dashboard')
+def admin_dashboard():
+    conn = sqlite3.connect('accounts.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM user')
+    registered_users = cursor.fetchall()
+    conn.close()
+    
+    return render_template('admin.html', users=registered_users)
 
 
 #---------------- error handling ------------------------------------------------

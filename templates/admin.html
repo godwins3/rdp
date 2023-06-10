@@ -1,8 +1,28 @@
-{% extends 'layout.html' %}
-
-{% block body%}
-<section>
-    
-</section>
-
-{%endblock%}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <style>
+    /* Add any necessary CSS styles here */
+  </style>
+</head>
+<body>
+  <h1>Admin Dashboard</h1>
+  <table>
+    <tr>
+      <th>Surname</th>
+      <th>Othername</th>
+      <th>Mobile</th>
+      <!-- Add more table headers as needed -->
+    </tr>
+    {% for user in users %}
+    <tr>
+      <td>{{ user[1] }}</td> <!-- Assuming name is in the second column -->
+      <td>{{ user[2] }}</td> <!-- Assuming email is in the third column -->
+      <td>{{ user[3] }}</td> <!-- Assuming mobile is in the fourth column -->
+      <!-- Add more table cells as needed -->
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
