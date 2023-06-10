@@ -56,7 +56,7 @@ def credentials_valid(idnumber, mobile):
             return False
 
 
-def username_taken(idnumber):
+def id_taken(idnumber):
     with session_scope() as s:
         return s.query(tabledef.User).filter(tabledef.User.idnumber.in_([idnumber])).first()
     

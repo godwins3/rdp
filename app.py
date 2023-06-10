@@ -30,23 +30,9 @@ def home():
 
 # -------- Login ------------------------------------------------------------- #
 @app.route('/login', methods=['GET', 'POST'])
-def login():
+def join_us():
     title = 'rdp - Login'
-    if not session.get('logged_in'):
-        form = forms.LoginForm(request.form)
-        if request.method == 'POST':
-            username = request.form['username'].lower()
-            password = request.form['password']
-            if form.validate():
-                if helpers.credentials_valid(username, password):
-                    session['logged_in'] = True
-                    session['username'] = username
-                    return json.dumps({'status': 'Login successful'})
-                return json.dumps({'status': 'Invalid user/pass'})
-            return json.dumps({'status': 'Both fields required'})
-        return render_template('login.html', form=form)
-    user = helpers.get_user()
-    return render_template('index.html', user=user, title=title)
+    return render_template('index.html', title=title)
 
 
 @app.route("/logout")
@@ -70,19 +56,25 @@ def register():
         county = request.form['county'].upper()
         constituency = request.form['constituency'].upper()
         email = request.form['email']
-        helpers.add_user(                        
-                email, 
-                surname, 
-                othername,
-                mobile,
-                idnumber,
-                D_O_B,
-                gender,
-                county,
-                constituency
-                )
+        if not helpers.id_taken(idnumber):
+            helpers.add_user(                        
+                    email, 
+                    surname, 
+                    othername,
+                    mobile,
+                    idnumber,
+                    D_O_B,
+                    gender,
+                    county,
+                    constituency
+                    )
+            form =forms.LoginForm(request.form)
+            return json.dumps({'status': 'Registration successful'})
+        return json.dumps({'status': 'id taken'})
+    else:
+        form =forms.LoginForm(request.form)
     return render_template('login.html', form=form, title=title)
-
+    
 
 # -------- Settings ---------------------------------------------------------- #
 @app.route('/settings', methods=['GET', 'POST'])

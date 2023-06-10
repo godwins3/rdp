@@ -62,9 +62,10 @@ $(document).ready(function() {
         if (status === "Registration successful") { location.reload(); }
         else { message(status, true, "signup-box"); }
       }
+      })
     });
   });
-
+  
   $(document).on("click", "#save", function() {
     $.post({
       type: "POST",
@@ -77,7 +78,7 @@ $(document).ready(function() {
       }
     });
   });
-});
+
 
 // Open or Close mobile & tablet menu
 // https://github.com/jgthms/bulma/issues/856
