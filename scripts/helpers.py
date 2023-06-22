@@ -46,10 +46,10 @@ def add_user(email, surname, othername, mobile, idnumber, D_O_B, gender, county,
                           constituency=constituency)
         s.add(u)
         s.commit()
-def add_events(event, date, time, location):
+def add_events(event_name, date, time, location):
     with session_scope() as s:
         u = tabledef.User(
-            event=event,
+            event_name=event_name,
             date=date,
             time=time,
             location=location
