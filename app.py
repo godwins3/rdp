@@ -111,7 +111,7 @@ def add_event():
   if request.method == "GET":
     return render_template("admin.html")
   else:
-    title = request.form["title"].upper()
+    event = request.form["title"].upper()
     date = request.form["date"]
     time = request.form["time"]
     location = request.form["location"].upper()
@@ -122,7 +122,7 @@ def add_event():
       "location": location,
     }
     helpers.add_events(
-        title,
+        event,
         date,
         time,
         location
