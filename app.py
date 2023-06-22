@@ -121,7 +121,7 @@ def add_event():
       "time": time,
       "location": location,
     }
-    helpers.add_event(
+    helpers.add_events(
         title,
         date,
         time,
