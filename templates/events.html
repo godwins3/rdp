@@ -1,46 +1,19 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="container content-container">
-    <div class="row no-gutters">
-        
-        <div class="col-md-9 order-md-2">
-            {% for post in posts.items %}
-            <div class="single-post-home">   
-                <h5>
-                    <a class="custom-link" href="{{ url_for('post_detail', post_slug=post.slug) }}">
-                        {{ post.title }}
-                    </a>
-                </h5>
-                <p class="p-small-two text-muted">
-                    {{ post.created_at.strftime('%d.%m.%Y') }}
-                </p>
-
-                {% if post.description %}
-                <p class="p-small-one text-muted mb-0">
-                    {{ post.description }}
-                    <a class="read-more" href="{{ url_for('post_detail', post_slug=post.slug) }}">Read article.</a>
-                </p>
-                {% endif %}
-            </div>
-            {% endfor %}
-            
-            <div class="pagination-block">
-                {% if previous_page %}
-                {% if current_page == 2 %}
-                <a class="btn btn-sm btn-outline-secondary" href="/">↩ Back</a>
-                {% else %}
-                <a class="btn btn-sm btn-outline-secondary" href="{{ previous_page }}">↩ Back</a>
-                {% endif %}
-                {% endif %}
-                {% if next_page %}
-                <a class="btn btn-sm btn-outline-secondary" href="{{ next_page }}">↪ After you</a>
-                {% endif %}
-            </div>
-        </div>
-
-        
-
-    </div>    
-</div>
+<div class="container">
+    <h1>Events</h1>
+    <ul class="list-group">
+      {% for event in events %}
+        <li class="list-group-item">
+          <h4>{{ event.title }}</h4>
+          <p>
+            {{ event.date }}<br>
+            {{ event.time }}<br>
+            {{ event.location }}
+          </p>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}

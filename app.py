@@ -106,6 +106,26 @@ def events():
     title ="rdp - events"
     return render_template('events.html', title=title)
 
+@app.route("/events/add", methods=["GET", "POST"])
+def add_event():
+  if request.method == "GET":
+    return render_template("add_event.html")
+  else:
+    title = request.form["title"]
+    date = request.form["date"]
+    time = request.form["time"]
+    location = request.form["location"]
+    event = {
+      "title": title,
+      "date": date,
+      "time": time,
+      "location": location,
+    }
+    db.session.add(event)
+    db.session.commit()
+    return redirect(url_for("events"))
+
+
 def send_email(name, email, message):
     # Set up the SMTP server details
     smtp_server = 'smtp.example.com'
