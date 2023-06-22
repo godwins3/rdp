@@ -41,7 +41,7 @@ class User(Base):
         return '<User %r>' % self.idnumber
 
 
-class Events(base):
+class Events(Base):
     __tablename__="Events"
 
     id = Column(Integer, unique=True)
