@@ -109,20 +109,25 @@ def events():
 @app.route("/events/add", methods=["GET", "POST"])
 def add_event():
   if request.method == "GET":
-    return render_template("add_event.html")
+    return render_template("admin.html")
   else:
-    title = request.form["title"]
+    title = request.form["title"].upper()
     date = request.form["date"]
     time = request.form["time"]
-    location = request.form["location"]
+    location = request.form["location"].upper()
     event = {
       "title": title,
       "date": date,
       "time": time,
       "location": location,
     }
-    db.session.add(event)
-    db.session.commit()
+    helpers.add_event(
+        title,
+        date,
+        time,
+        location
+    )
+
     return redirect(url_for("events"))
 
 

@@ -46,7 +46,17 @@ def add_user(email, surname, othername, mobile, idnumber, D_O_B, gender, county,
                           constituency=constituency)
         s.add(u)
         s.commit()
-
+def add_events(title, date, time, location):
+    with session_scope() as s:
+        u = tabledef.User(
+            title=title,
+            date=date,
+            time=time,
+            location=location
+        )
+        s.add(u)
+        s.commit()
+        
 def credentials_valid(idnumber, mobile):
     with session_scope() as s:
         user = s.query(tabledef.User).filter(tabledef.User.idnumber.in_([idnumber])).first()
