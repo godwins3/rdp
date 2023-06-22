@@ -116,7 +116,7 @@ def add_event():
     time = request.form["time"]
     location = request.form["location"].upper()
     event = {
-      "event": title,
+      "event": event,
       "date": date,
       "time": time,
       "location": location,
