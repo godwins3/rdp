@@ -49,7 +49,7 @@ def add_user(email, surname, othername, mobile, idnumber, D_O_B, gender, county,
 def add_events(event, date, time, location):
     with session_scope() as s:
         u = tabledef.User(
-            event=title,
+            event=event,
             date=date,
             time=time,
             location=location
