@@ -35,11 +35,23 @@ class User(Base):
     gender =Column(String(50))
     county = Column(String(50))
     constituency =Column(String(50))
-                        
+                   
     
     def __repr__(self):
         return '<User %r>' % self.idnumber
 
+
+class Events(Base):
+    __tablename__="Events"
+
+    id = Column(Integer, unique=True)
+    event_name = Column(String(50))
+    date = Column(String(50))
+    time = Column(String(50))
+    location = Column(String(50))
+
+    def __repr__(self):
+        return '<Events %r>' % self.id
 
 engine = db_connect()  # Connect to database
 Base.metadata.create_all(engine)  # Create models
